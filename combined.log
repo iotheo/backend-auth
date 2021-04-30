@@ -1,0 +1,16 @@
+info: 1234GET / 200 - 2.727 ms {"service":"user-service"}
+info: 1234GET / 200 - 2.284 ms {"service":"user-service"}
+info: GET / 304 - 2.805 ms {"service":"user-service"}
+info: GET / 304 - 0.449 ms {"service":"user-service"}
+info: GET / 304 - 0.297 ms {"service":"user-service"}
+info: GET / 200 - 0.442 ms {"service":"user-service"}
+error: GET /favicon.ico 404 - 1.295 ms - message: - {"service":"user-service"}
+info: GET / 304 - 0.272 ms {"service":"user-service"}
+info: GET / 304 - 0.303 ms {"service":"user-service"}
+info: GET / 304 - 2.244 ms {"service":"user-service"}
+info: GET / 200 - 0.536 ms {"service":"user-service"}
+info: GET / 304 - 2.597 ms {"service":"user-service"}
+info: GET / 304 - 0.625 ms {"service":"user-service"}
+info: 1234GET / 304 - 2.561 ms {"service":"user-service"}
+info: 1234GET / 304 - 2.532 ms {"service":"user-service"}
+info: GET / 304 - 2.848 ms {"service":"user-service"}

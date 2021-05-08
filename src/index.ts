@@ -1,6 +1,7 @@
 import express, { Request, Response } from "express";
-const logger = require("./log/config");
 import jwt from "jsonwebtoken";
+
+const logger = require("./log/config");
 
 const app = express();
 const PORT = 8000;
@@ -45,7 +46,7 @@ app.post("/login", async (req: Request, res: Response) => {
   }
 
   res.json({
-    jwtToken: decodedToken,
+    jwtToken: decodedToken.signature,
     jwtExpiryDate: decodedToken.payload.exp,
   });
 });

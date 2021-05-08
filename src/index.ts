@@ -1,6 +1,5 @@
 import express, { Request, Response } from "express";
 const logger = require("./log/config");
-import cookieParser from "cookie-parser";
 
 const app = express();
 const PORT = 8000;
@@ -16,7 +15,7 @@ function generateAccessToken(): string {
 app.use(logger.successHandler);
 app.use(logger.errorHandler);
 
-app.post("/", (req: Request, res: Response) => {
+app.post("/login", (req: Request, res: Response) => {
   res.cookie("session", generateRefreshToken(), {
     httpOnly: true,
     maxAge: 60 * 60 * 24 * 365,

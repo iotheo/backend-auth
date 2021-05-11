@@ -1,17 +1,21 @@
 import express, { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
 
 import {
   generateRefreshToken,
   generateAccessToken,
   hasValidCredentials,
 } from "./utils";
+
 import { UserCredentials } from "./utils/types";
-import { userInfo } from "node:os";
+import { authMiddleware } from "./middlewares";
+
 const logger = require("./log/config");
 
 const app = express();
+app.use(cookieParser());
 
 app.use(logger.successHandler);
 app.use(logger.errorHandler);

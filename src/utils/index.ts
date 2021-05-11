@@ -1,6 +1,8 @@
-import { UserCredentials, Username } from "./types";
-import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
+
+import { UserCredentials, Username } from "./types";
+import generateRefreshToken from "./generateRefreshToken";
+import generateAccessToken from "./generateAccessToken";
 
 dotenv.config();
 
@@ -32,30 +34,6 @@ function hasValidCredentials(userCredentials: UserCredentials): boolean {
   }
 
   return true;
-}
-
-function generateRefreshToken(username: Username): string {
-  const refreshToken: string = jwt.sign(
-    {
-      user: username,
-    },
-    authSecret,
-    {
-      algorithm: "HS512",
-      expiresIn: maxAge,
-    }
-  );
-
-  return refreshToken;
-}
-
-function generateAccessToken(): string {
-  const accessToken: string = jwt.sign({}, authSecret, {
-    algorithm: "HS512",
-    expiresIn: 60 * 15,
-  });
-
-  return accessToken;
 }
 
 export { hasValidCredentials, generateRefreshToken, generateAccessToken };

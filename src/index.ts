@@ -8,6 +8,7 @@ import {
   hasValidCredentials,
 } from "./utils";
 import { UserCredentials } from "./utils/types";
+import { userInfo } from "node:os";
 const logger = require("./log/config");
 
 const app = express();
@@ -16,6 +17,8 @@ app.use(logger.successHandler);
 app.use(logger.errorHandler);
 app.use(express.json());
 dotenv.config();
+
+// app.use(authMiddleware);
 
 const PORT = process.env.PORT!;
 const maxAge = process.env.MAX_AGE!;

@@ -1,4 +1,3 @@
-import { Username } from "./types";
 import jwt from "jsonwebtoken";
 
 function generateAccessToken(): string {

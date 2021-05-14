@@ -22,8 +22,6 @@ app.use(logger.errorHandler);
 app.use(express.json());
 dotenv.config();
 
-// app.use(authMiddleware);
-
 const PORT = process.env.PORT!;
 const maxAge = process.env.MAX_AGE!;
 
@@ -51,7 +49,7 @@ app.post("/login", (req: Request<{}, {}, UserCredentials>, res: Response) => {
   const decodedRefreshToken = jwt.decode(refreshToken);
 
   if (!decodedRefreshToken) {
-    return res.status(501).json({
+    return res.status(401).json({
       message: "Invalid Refresh token",
     });
   }
@@ -61,7 +59,7 @@ app.post("/login", (req: Request<{}, {}, UserCredentials>, res: Response) => {
   const decodedAccessToken = jwt.decode(accessToken, { complete: true });
 
   if (!decodedAccessToken) {
-    return res.status(501).json({
+    return res.status(401).json({
       message: "Invalid Access token",
     });
   }
@@ -72,8 +70,16 @@ app.post("/login", (req: Request<{}, {}, UserCredentials>, res: Response) => {
   });
 
   res.json({
-    jwtToken: decodedAccessToken.signature,
+    jwtToken: accessToken,
     jwtExpiryDate: decodedAccessToken.payload.exp,
+  });
+});
+
+// app.use(authMiddleware);
+
+app.post("/", (req: Request, res: Response) => {
+  res.json({
+    message: "Hello world",
   });
 });
 

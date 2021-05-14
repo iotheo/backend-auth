@@ -4,7 +4,7 @@ This project is meant to provide JWT authentication with Refresh and Access toke
 
 # Goals
 - Refresh and Access Token authentication ✓
-- Authentication Middleware 
+- Authentication Middleware ✓
 - Logger Middleware ✓
-- DB agnostic integration
+- DB agnostic integration ✓
 - TypeScript ready 🚀 ✓

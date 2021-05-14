@@ -26,6 +26,8 @@ const PORT = process.env.PORT!;
 const maxAge = process.env.MAX_AGE!;
 
 app.post("/login", (req: Request<{}, {}, UserCredentials>, res: Response) => {
+  const username = req.body.username;
+
   if (!req.body) {
     return res.status(400).json({
       message: "Empty request body",
@@ -44,7 +46,7 @@ app.post("/login", (req: Request<{}, {}, UserCredentials>, res: Response) => {
     });
   }
 
-  const refreshToken = generateRefreshToken(req.body.username);
+  const refreshToken = generateRefreshToken(username);
 
   const decodedRefreshToken = jwt.decode(refreshToken);
 
@@ -54,7 +56,7 @@ app.post("/login", (req: Request<{}, {}, UserCredentials>, res: Response) => {
     });
   }
 
-  const accessToken = generateAccessToken();
+  const accessToken = generateAccessToken(username);
 
   const decodedAccessToken = jwt.decode(accessToken, { complete: true });
 
@@ -75,7 +77,7 @@ app.post("/login", (req: Request<{}, {}, UserCredentials>, res: Response) => {
   });
 });
 
-// app.use(authMiddleware);
+app.use(authMiddleware);
 
 app.post("/", (req: Request, res: Response) => {
   res.json({

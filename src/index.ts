@@ -10,7 +10,11 @@ import {
 } from "./utils";
 
 import { UserCredentials } from "./utils/types";
-import { authMiddleware, handleRefreshTokenMiddleware } from "./middlewares";
+import {
+  authMiddleware,
+  handleAccessTokenMiddleware,
+  handleRefreshTokenMiddleware,
+} from "./middlewares";
 import { AccessTokenResponse } from "./types";
 
 const logger = require("./log/config");
@@ -107,7 +111,11 @@ app.post(
   }
 );
 
-app.use(authMiddleware);
+app.use(
+  handleRefreshTokenMiddleware,
+  handleAccessTokenMiddleware,
+  authMiddleware
+);
 
 app.post("/", (req: Request, res: Response) => {
   res.json({

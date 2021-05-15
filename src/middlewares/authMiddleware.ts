@@ -1,29 +1,15 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from "jsonwebtoken";
+import { handleRefreshTokenMiddleware, handleAccessTokenMiddleware } from "./";
 
 function authMiddleware(req: Request, res: Response, next: NextFunction) {
-  if (!req.cookies?.session) {
-    return res.status(401).json({
-      message: "Unauthorized. Please login",
-    });
-  }
+  handleRefreshTokenMiddleware(req, res, next);
 
   const refreshToken: string = req.cookies.session;
 
-  try {
-    jwt.verify(refreshToken, process.env.AUTHENTICATION_SECRET!);
-  } catch (e) {
-    // TODO check error and send corresponding status code
-    return res.status(422).json(e);
-  }
+  handleAccessTokenMiddleware(req, res, next);
 
   const accessToken = req.body.jwt;
-  try {
-    jwt.verify(accessToken, process.env.AUTHENTICATION_SECRET!);
-  } catch (e) {
-    // TODO check error and send corresponding status code
-    return res.status(422).json(e);
-  }
 
   const decodedRefreshToken = jwt.decode(refreshToken, { complete: true });
 

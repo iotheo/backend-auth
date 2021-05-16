@@ -21,7 +21,7 @@ The Refresh Token is meant to be stored in the User Agent as an `httpOnly` cooki
 ## Auth Server
 When the user requests to login, a Refresh Token will be sent as an `httpOnly` cookie (with a very long `maxAge`) which will be _safely_ stored in the User Agent and a payload which will consist of a short lived (15 minutes) Access Token (as `jwt`) and its `expiry date` (as `jwtExpiryDate`).
 
-![authorized-calls](https://user-images.githubusercontent.com/22287199/118382832-d33aca00-b601-11eb-8eba-e1e39c6422e8.jpg)
+![authorized-calls](https://user-images.githubusercontent.com/22287199/118383155-201fa000-b604-11eb-9cdb-365aa5c679c3.jpg)
 
 You must have noticed in the flow chart above that there is a step where it is checked whether a Refresh Token is `denylisted`. We mentioned above that the JWTs are stateless and the only means to be invalidated is when it is expired. So, we are going to use a database to store all these tokens in order to invalidate them.
 

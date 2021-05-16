@@ -83,15 +83,16 @@ app.post(
     });
 
     res.json({
-      jwtToken: accessToken,
+      jwt: accessToken,
       jwtExpiryDate: decodedAccessToken.payload.exp,
     });
   }
 );
 
+app.use(handleRefreshTokenMiddleware);
+
 app.post(
   "/refresh_token",
-  handleRefreshTokenMiddleware,
   (req: Request, res: Response<AccessTokenResponse | { message: string }>) => {
     const refreshToken = req.cookies.session;
 
@@ -106,21 +107,29 @@ app.post(
     const decodedAccessToken = jwt.decode(accessToken, { complete: true })!;
 
     return res.json({
-      jwtToken: accessToken,
+      jwt: accessToken,
       jwtExpiryDate: decodedAccessToken.payload.exp,
     });
   }
 );
 
-app.use(
-  handleRefreshTokenMiddleware,
-  handleAccessTokenMiddleware,
-  authMiddleware
-);
+app.use(handleAccessTokenMiddleware, authMiddleware);
 
 app.post("/", (req: Request, res: Response) => {
   res.json({
     message: "Hello world",
+  });
+});
+
+app.post("/logout", (req: Request, res: Response) => {
+  /* Here, we need to store the requested Refresh token to a denylist (in a database),
+    and thus invalidate it.
+  */
+
+  res.clearCookie("session");
+
+  res.json({
+    message: "Logged out successfully",
   });
 });
 

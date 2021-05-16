@@ -1,5 +1,5 @@
 export type AccessTokenResponse = {
-  jwtToken: string;
+  jwt: string;
   jwtExpiryDate: string;
 };
 

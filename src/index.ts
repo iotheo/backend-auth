@@ -79,6 +79,7 @@ app.post(
     res.cookie("session", refreshToken, {
       httpOnly: true,
       maxAge: Number(maxAge),
+      sameSite: "strict",
     });
 
     res.json({

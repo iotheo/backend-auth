@@ -23,6 +23,7 @@ When the user requests to login, a Refresh Token will be sent as an `httpOnly` c
 
 ![authorized-calls](https://user-images.githubusercontent.com/22287199/118382832-d33aca00-b601-11eb-8eba-e1e39c6422e8.jpg)
 
+You must have noticed in the flow chart above that there is a step where it is checked whether a Refresh Token is `denylisted`. We mentioned above that the JWTs are stateless and the only means to be invalidated is when it is expired. So, we are going to use a database to store all these tokens in order to invalidate them.
 
 ## Client
 _In progress_

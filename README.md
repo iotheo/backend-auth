@@ -9,5 +9,9 @@ This project is meant to provide JWT authentication with Refresh and Access toke
 - [x] DB agnostic integration
 - [x] TypeScript ready 🚀
 
+# TODO
+- [x] Logout functionality
+- [ ] Adequate documentation
+
 # Improvements
 - [ ] Proper Error handling responses on jwt verification checks

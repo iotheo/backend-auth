@@ -33,7 +33,7 @@ _In progress_
 - [x] Refresh and Access Token authentication
 - [x] XSS protection
 - [x] CSRF mitigation
-- [x] DB agnostic integration
+- [ ] DB agnostic integration
 - [x] Logger Middleware
 - [x] TypeScript ready 🚀
 
